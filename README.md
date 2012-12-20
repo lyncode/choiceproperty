@@ -26,7 +26,7 @@ For example:
 
 The above example will output:
 
-	20 Items
+	20 items
 
 Choice Property also allows unique sentences, so it's compatible with
 `String.format`. For example:
