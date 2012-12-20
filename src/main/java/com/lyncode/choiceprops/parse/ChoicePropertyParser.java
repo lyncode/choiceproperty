@@ -12,6 +12,7 @@ import org.parboiled.support.ParsingResult;
 import com.lyncode.choiceprops.element.Expression;
 import com.lyncode.choiceprops.element.ExpressionList;
 import com.lyncode.choiceprops.element.IContainable;
+import com.lyncode.choiceprops.element.IntegerContainable;
 import com.lyncode.choiceprops.element.IntervalContainable;
 import com.lyncode.choiceprops.element.ListContainable;
 import com.lyncode.choiceprops.element.NamedContainable;
@@ -70,7 +71,7 @@ public class ChoicePropertyParser extends BaseParser<Object> {
 		);
 	}
 	
-	Rule IntervalExpression () {
+	Rule IntervalContainer () {
 		return Sequence(
 				FirstOf(
 						Sequence(
@@ -110,7 +111,13 @@ public class ChoicePropertyParser extends BaseParser<Object> {
 								String("]"),
 								((IntervalContainable) peek()).setEndIncludes(true)
 						)
-				),
+				)
+			);
+	}
+	
+	Rule IntervalExpression () {
+		return Sequence(
+				IntervalContainer(),
 				Spacing(),
 				EmptyExpression(),
 				((Expression) peek()).setContainable((IContainable) pop(1))
@@ -128,15 +135,27 @@ public class ChoicePropertyParser extends BaseParser<Object> {
 		return Sequence(
 				String("("),
 				Spacing(),
-				Number(),
+				FirstOf(
+						Sequence(
+								Number(),
+								push(new IntegerContainable(match()))
+						),
+						IntervalContainer()
+				),
 				push(new ListContainable()),
-				((ListContainable)peek()).add(match()),
+				((ListContainable)peek()).add((IContainable)pop(1)),
 				Spacing(),
 				ZeroOrMore(
 						String(","), 
 						Spacing(),
-						Number(),
-						((ListContainable)peek()).add(match()),
+						FirstOf(
+								Sequence(
+										Number(),
+										push(new IntegerContainable(match()))
+								),
+								IntervalContainer()
+						),
+						((ListContainable)peek(1)).add((IContainable)pop()),
 						Spacing()
 				),
 				String(")"),

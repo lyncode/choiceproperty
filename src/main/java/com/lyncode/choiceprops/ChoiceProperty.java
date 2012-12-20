@@ -38,7 +38,7 @@ public class ChoiceProperty {
 	}
 	
 	public static void main (String... test) throws ChoicePropertyException {
-		String input = "zero: none|one: hello|[2,3] Hi you!|]3,Inf] Hey!";
+		String input = "(0,[5,Inf[) plural|(1) hello|[2,4] Hi you!";
 		
 		System.out.println(translate(12312312, input));
 	}
