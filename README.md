@@ -1,7 +1,7 @@
 Choice Property
 ===============
 
-**What is? **
+**What is?**
 
 Choice Property (for Java) allows one to choose a property depending on the
 input. It helps translation engines in the pluralization definition.
@@ -10,12 +10,23 @@ input. It helps translation engines in the pluralization definition.
 
 The syntax is pretty simple. Look at the following example:
 
-	(0) No items | (1) One item | ]1, INF[ Many items
+	(0) No items | (1) One item | ]1, INF[ {0} items
 
 It works almost like `String.format` with one extra argument (the count
 argument).
 
 	ChoiceProperty.choiceFormat(<count>, <message>, <opt. args>)
+
+For example:
+
+	int count = 20;
+	String message = "(0) No items | (1) One item | ]1, Inf[ {0} items";
+	String choice = ChoiceProperty.choiceFormat(count, message, count);
+	System.out.println(choice);
+
+The above example will output:
+
+	20 Items
 
 Choice Property also allows unique sentences, so it's compatible with
 `String.format`. For example:
