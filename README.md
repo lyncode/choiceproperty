@@ -13,7 +13,7 @@ Maven:
 
     <dependency>
        <groupId>com.lyncode</groupId>
-       <artifactId>plural-properties</artifactId>
+       <artifactId>plural-property</artifactId>
        <version>1.0.0</version>
     </dependency>
 
