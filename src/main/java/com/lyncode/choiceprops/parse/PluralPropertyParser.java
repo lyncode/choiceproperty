@@ -89,7 +89,7 @@ public class PluralPropertyParser extends BaseParser<Object> {
 								Number(),
 								((IntervalContainable) peek()).setBegin(match())
 						),
-						String("Inf")
+						infRule()
 				),
 				Spacing(),
 				String(","),
@@ -99,7 +99,7 @@ public class PluralPropertyParser extends BaseParser<Object> {
 								Number(),
 								((IntervalContainable) peek()).setEnd(match())
 						),
-						String("Inf")
+						infRule()
 				),
 				Spacing(),
 				FirstOf(
@@ -114,7 +114,15 @@ public class PluralPropertyParser extends BaseParser<Object> {
 				)
 			);
 	}
-	
+
+	Rule infRule() {
+		return FirstOf(
+                String("Inf"),
+                String("INF"),
+                String("inf")
+        );
+	}
+
 	Rule IntervalExpression () {
 		return Sequence(
 				IntervalContainer(),

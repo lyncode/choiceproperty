@@ -4,8 +4,10 @@ import com.lyncode.choiceprops.element.Expression;
 import com.lyncode.choiceprops.element.ExpressionList;
 import com.lyncode.choiceprops.parse.PluralPropertyParser;
 
+import java.util.Map;
+
 public class PluralProperty {
-	public static String translate (int choice, String message, Object... parameters) throws PluralPropertyException {
+	public static String translate (int choice, String message, Map<String, Object> replacements) throws PluralPropertyException {
 		ExpressionList expList = PluralPropertyParser.parse(message);
 		Expression selected = null;
 		for (Expression exp : expList) {
@@ -17,29 +19,11 @@ public class PluralProperty {
 		
 		if (selected == null)
 			throw new PluralPropertyException("Unable to find usable expression");
-		
-		return String.format(selected.getExpression(), parameters);
-	}
-	
-	public static String translate (int choice, String message) throws PluralPropertyException {
-		ExpressionList expList = PluralPropertyParser.parse(message);
-		Expression selected = null;
-		for (Expression exp : expList) {
-			if (exp.in(choice)) {
-				selected = exp;
-				break;
-			}
+
+		String result = selected.getExpression().trim();
+		for (Map.Entry<String, Object> entry : replacements.entrySet()) {
+			result = result.replace(entry.getKey(), entry.getValue().toString());
 		}
-		
-		if (selected == null)
-			throw new PluralPropertyException("Unable to find usable expression");
-		
-		return String.format(selected.getExpression());
-	}
-	
-	public static void main (String... test) throws PluralPropertyException {
-		String input = "(0,[5,Inf[) plural|(1) hello|[2,4] Hi you!";
-		
-		System.out.println(translate(12312312, input));
+		return result;
 	}
 }
