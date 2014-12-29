@@ -8,6 +8,15 @@ input. It helps translation engines in the pluralization definition.
 
 **How?**
 
+
+Maven:
+
+    <dependency>
+       <groupId>com.lyncode</groupId>
+       <artifactId>plural-properties</artifactId>
+       <version>1.0.0</version>
+    </dependency>
+
 The syntax is pretty simple. Look at the following example:
 
 	(0) No items | (1) One item | ]1, INF[ {0} items
