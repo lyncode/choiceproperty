@@ -17,8 +17,8 @@ import com.lyncode.choiceprops.element.IntervalContainable;
 import com.lyncode.choiceprops.element.ListContainable;
 import com.lyncode.choiceprops.element.NamedContainable;
 
-public class ChoicePropertyParser extends BaseParser<Object> {
-	private static ChoicePropertyParser parser;
+public class PluralPropertyParser extends BaseParser<Object> {
+	private static PluralPropertyParser parser;
 	
 	
 
@@ -30,7 +30,7 @@ public class ChoicePropertyParser extends BaseParser<Object> {
 	
 	public static ExpressionList parse (String input) {
     	if (parser == null)
-    		parser = Parboiled.createParser(ChoicePropertyParser.class);
+    		parser = Parboiled.createParser(PluralPropertyParser.class);
     	ParsingResult<Object> result = new RecoveringParseRunner<Object>(parser.Translate()).run(input);
     	Object e = result.valueStack.pop();
     	

@@ -1,9 +1,9 @@
-Choice Property
+Plural Properties
 ===============
 
 **What is?**
 
-Choice Property (for Java) allows one to choose a property depending on the
+Plural Properties (for Java) allows one to choose a plural depending on the
 input. It helps translation engines in the pluralization definition.
 
 **How?**
@@ -15,7 +15,7 @@ The syntax is pretty simple. Look at the following example:
 It works almost like `String.format` with one extra argument (the count
 argument).
 
-	ChoiceProperty.choiceFormat(<count>, <message>, <opt. args>)
+	PluralProperty.choiceFormat(<count>, <message>, <opt. args>)
 
 For example:
 
@@ -28,11 +28,11 @@ The above example will output:
 
 	20 items
 
-Choice Property also allows unique sentences, so it's compatible with
+Plural Property also allows unique sentences, so it's compatible with
 `String.format`. For example:
 
 	String message = "No choice to make{0}";
-	String choiceResult = ChoiceProperty.choiceFormat(0, message, "!");
+	String choiceResult = PluralProperty.choiceFormat(0, message, "!");
 	String formatResult = String.format(message, "!");
 
 Both `choiceResult` and `formatResult` will be the same.
