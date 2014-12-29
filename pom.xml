@@ -10,7 +10,7 @@
 
     <groupId>com.lyncode</groupId>
     <artifactId>plural-property</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>Plural Properties</name>
     <description>Plural Properties by Lyncode</description>
